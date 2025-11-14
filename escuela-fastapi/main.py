@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+
 from routers import alumnos, profesores
 import uvicorn
 
@@ -19,7 +20,6 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         status_code=400,
         content={"detail": exc.errors(), "body": exc.body}
     )
-
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
