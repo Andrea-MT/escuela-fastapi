@@ -6,7 +6,7 @@ from services import AlumnoService
 router = APIRouter()
 service = AlumnoService()
 
-@router.get("/", response_model=List[Alumno], status_code=status.HTTP_200_OK)
+@router.get("", response_model=List[Alumno], status_code=status.HTTP_200_OK)
 def list_alumnos():
     return service.get_all()
 
@@ -17,10 +17,13 @@ def get_alumno(id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Alumno no encontrado")
     return alumno
 
-@router.post("/", response_model=Alumno, status_code=status.HTTP_201_CREATED)
-def create_alumno(payload: AlumnoCreate):
-    nuevo = service.create(payload)
-    return nuevo
+@router.post("", response_model=Alumno, status_code=status.HTTP_201_CREATED)
+def create_alumno(payload: Alumno):
+    try:
+        nuevo = service.create(payload)
+        return nuevo
+    except HTTPException as e:
+        raise e
 
 @router.put("/{id}", response_model=Alumno, status_code=status.HTTP_200_OK)
 def update_alumno(id: int, payload: AlumnoCreate):
