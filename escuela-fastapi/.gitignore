@@ -1,0 +1,70 @@
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Ignorar entorno virtual
+venv/
+env/
+ENV/
+.venv
+
+# Ignorar caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Ignorar IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ignorar base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignorar logs
+server.log
+*.log
+
+# Ignorar archivos temporales
+*.tmp
+tmp/
+temp/
+
+# AWS
+aws_creds.txt
+.aws/
+
+# Testing
+.pytest_cache/
+htmlcov/
+.tox/
+dist/
+build/
+*.egg-info/
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db

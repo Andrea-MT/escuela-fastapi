@@ -1,28 +1,41 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 
-class Alumno(BaseModel):
-    id: int
+class AlumnoBase(BaseModel):
     nombres: str = Field(min_length=1)
     apellidos: str = Field(min_length=1)
     matricula: str = Field(min_length=1)
     promedio: float = Field(ge=0.0, le=10.0)
+    fotoPerfilUrl: Optional[str] = None
+    
+class AlumnoCreate(AlumnoBase):
+    password: str = Field(min_length=1)
 
-class AlumnoCreate(BaseModel):
-    nombres: str = Field(min_length=1)
-    apellidos: str = Field(min_length=1)
-    matricula: str = Field(min_length=1)
-    promedio: float = Field(ge=0.0, le=10.0)
-
-class Profesor(BaseModel):
+class Alumno(AlumnoBase):
     id: int
+    password: Optional[str] = None
+    class Config:
+        orm_mode = True
+
+class ProfesorBase(BaseModel):
     nombres: str = Field(min_length=1)
     apellidos: str = Field(min_length=1)
-    numeroEmpleado: int
+    numeroEmpleado: int = Field(gt=0)
     horasClase: int = Field(ge=0)
 
-class ProfesorCreate(BaseModel):
+class ProfesorCreate(ProfesorBase):
+    pass
+
+class Profesor(ProfesorBase):
     id: int
-    nombres: str = Field(min_length=1)
-    apellidos: str = Field(min_length=1)
-    numeroEmpleado: int
-    horasClase: int = Field(ge=0)
+    class Config:
+        orm_mode = True
+
+class LoginRequest(BaseModel):
+    password: str
+
+class VerifySessionRequest(BaseModel):
+    sessionString: str
+
+class LogoutRequest(BaseModel):
+    sessionString: str

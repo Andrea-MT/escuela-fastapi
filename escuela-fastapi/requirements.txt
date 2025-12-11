@@ -1,2 +1,9 @@
 fastapi
 uvicorn[standard]
+gunicorn
+sqlalchemy
+psycopg2-binary
+boto3
+python-multipart
+requests
+python-dotenv
